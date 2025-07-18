@@ -8,6 +8,7 @@ from email_manager.config import Config
 import json
 import datetime
 from typing import Optional
+from app_confetti.fetch import dotenv
 
 
 class TokenAuthentication:
@@ -50,7 +51,7 @@ class EmailFetcher:
             userId="me",
             id=message["id"],
             format="full"
-        ).execute
+        ).execute()
 
         return msg
 
@@ -80,12 +81,16 @@ class EmailFetcher:
 
 
 if __name__ == "__main__":
-    client = TokenAuthentication(["https://mail.google.com/"])
-    credentials = json.load(open("credentials/gmail_credentials.json", "rb"))
-    token = client.create_token(client_config=credentials, token_path="credentials/gmail_credentials.json")
+    # client = TokenAuthentication(["https://mail.google.com/"])
+    # credentials = json.load(open("credentials/gmail_credentials.json", "rb"))
+    # token = client.create_token(client_config=credentials, token_path="credentials/gmail_token.json")
 
-    # settings = Config()
-    # since = datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(1)
+    dotenv.fetch_to_env()
+    settings = Config()
 
-    # fetcher = EmailFetcher(token=token)
-    # emails = fetcher.fetch_emails(since)
+    token = json.load(open("credentials/gmail_token.json", "rb"))
+
+    since = datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(1)
+    fetcher = EmailFetcher(token=token)
+
+    emails = fetcher.fetch_emails(since)

@@ -9,9 +9,9 @@ def optional_str(v):
 @dataclasses.dataclass
 class Config:
     gmail_token: str = util.env("GMAIL_TOKEN: None", optional_str)
-    gmail_refresh_token: str = util.env("GMAIL_REFESH_TOKEN:None", optional_str)
+    gmail_refresh_token: str = util.env("GMAIL_REFRESH_TOKEN:None", optional_str)
     gmail_client_id: str = util.env("GMAIL_CLIENT_ID:None", optional_str)
-    gmail_client_secret: str = util.env("GMAIL_CLIENT_SECRET:None", optional_str)
+    gmail_client_secret: str = util.env("GMAIL_CLIENT_SECRET", optional_str)
 
     @property
     def gmail_token_json(self):
