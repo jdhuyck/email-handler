@@ -1,6 +1,6 @@
 [project]
 name = "email_manager"
-version = "0.2.0"
+version = "0.2.1"
 description = "A personalised email inbox handler"
 authors = [
     {name = "Jody Huyck-Jones",email = "68274088+jdhuyck@users.noreply.github.com"}
