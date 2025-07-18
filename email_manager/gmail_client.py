@@ -4,7 +4,6 @@ from math import trunc
 from pathlib import Path
 from typing import Optional
 
-from app_confetti.fetch import dotenv
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -13,7 +12,7 @@ from googleapiclient.discovery import build
 from email_manager.config import Config
 
 
-class TokenAuthentication:
+class GmailTokenAuthentication:
     def __init__(self, scopes: list = ["https://mail.google.com/"]):
         self.scopes = scopes
 
@@ -44,9 +43,9 @@ class TokenAuthentication:
             json.dump(token_data, token)
 
 
-class EmailFetcher:
+class GmailFetcher:
     def __init__(self, token: json):
-        self.service = TokenAuthentication.gmail_authenticate(self, token)
+        self.service = GmailTokenAuthentication.gmail_authenticate(self, token)
 
     def _parse_message(self, message):
         msg = self.service.users().messages().get(
@@ -89,13 +88,12 @@ if __name__ == "__main__":
     #     client_config=credentials,
     #     token_path="credentials/gmail_token.json")
 
-    dotenv.fetch_to_env()
     settings = Config()
 
     token = json.load(open("credentials/gmail_token.json", "rb"))
 
     since = datetime.datetime.now(
         tz=datetime.timezone.utc) - datetime.timedelta(1)
-    fetcher = EmailFetcher(token=token)
+    fetcher = GmailFetcher(token=token)
 
     emails = fetcher.fetch_emails(since)
