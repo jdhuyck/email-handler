@@ -1,0 +1,33 @@
+[project]
+name = "email_manager"
+version = "0.1.1"
+description = "A personalised email inbox handler"
+authors = [
+    {name = "Jody Huyck-Jones",email = "68274088+jdhuyck@users.noreply.github.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "google-api-python-client (>=2.176.0,<3.0.0)",
+    "google-auth-httplib2 (>=0.2.0,<0.3.0)",
+    "google-auth-oauthlib (>=1.2.2,<2.0.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "msal (>=1.32.3,<2.0.0)",
+    "requests (>=2.32.4,<3.0.0)",
+    "beautifulsoup4 (>=4.13.4,<5.0.0)",
+    "pandas (>=2.3.1,<3.0.0)",
+    "python-dateutil (>=2.9.0.post0,<3.0.0)",
+    "isort (>=6.0.1,<7.0.0)"
+]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+pytest-mock = "^3.14.1"
+flake8 = "^7.3.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
